@@ -1,6 +1,7 @@
 import React from 'react';
 import data from './data';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import Product from './component/Product';
 
 
 function App() {
@@ -19,28 +20,8 @@ function App() {
          <div>
          <div className="row center">
          {data.products.map(product =>(
-           <div key={product._id} className="card">
-                <a href={`/product/${product._id}`}>
-                        <img 
-                        className="medium" 
-                        src={product.image}  
-                        alt={product.name} />
-                </a>
-                 <div className="card-body">
-                     <a href="product.html">
-                         <h2>{product.name}</h2>
-                     </a>
-                     <div className="rating">
-                         <span><i className="fa fa-star"></i></span>
-                         <span><i className="fa fa-star"></i></span>
-                         <span><i className="fa fa-star"></i></span>
-                         <span><i className="fa fa-star"></i></span>
-                         <span><i className="fa fa-star-half-o"></i></span>
-                     </div>
-                     <div className="price"> ${product.price} </div>
-                 </div>
-              </div>
-              ))}
+          <Product key ={product._id} product={product} />
+        ))}
       </div>
      </div>
 </main>
