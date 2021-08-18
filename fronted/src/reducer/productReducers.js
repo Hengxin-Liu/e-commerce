@@ -1,6 +1,6 @@
 import * as ActionType from "../constants/productConstants";
 
-export const productListReducer = (state={products:[]}, action) => {
+export const productListReducer = (state={loading:true,products:[]}, action) => {
     switch (action.type) {
         case ActionType.PRODUCT_LIST_REQUEST:
             return { loading: true };

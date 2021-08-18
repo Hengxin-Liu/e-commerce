@@ -7,26 +7,11 @@ import { listProducts } from '../actions/productAction';
 
 
 export default function HomeScreen(props) {
-   /* const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-   const [error, setError] = useState(false);*/
    const dispatch=useDispatch();
    const productList=useSelector((state)=>state.productList);
    const {loading ,error,products}=productList;
        useEffect(() => {
            dispatch(listProducts());
-       /* const fecthData = async () => {
-            try {
-                setLoading(true);
-                const { data } = await axios.get('api/products');
-                setLoading(false);
-                setProducts(data);
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);
-            }
-        };
-        fecthData();*/
     }, []);
     return (
         <div>
