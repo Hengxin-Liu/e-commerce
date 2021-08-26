@@ -1,6 +1,6 @@
 import Axios from "axios";
 import * as  ActionType from "../constants/productConstants"
-import { productListReducer } from "../reducer/productReducers";
+
 
 export const listProducts = () => async (dispatch) => {
     dispatch({
@@ -31,4 +31,3 @@ export const detailsProduct = (productId) => async (dispatch) => {
     }
 };
 
-ref
