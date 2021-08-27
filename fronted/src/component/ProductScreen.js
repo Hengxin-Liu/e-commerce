@@ -92,7 +92,7 @@ export default function ProductScreen(props) {
                         </div>
                       </div>
                       <li>
-                        <button onClick={addToCartHandler}
+                        <button onClick={()=>addToCartHandler()}
                          className="primary block">Add to Cart</button>
                       </li>
                     </>
