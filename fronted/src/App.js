@@ -7,6 +7,7 @@ import CartScreen from './component/CartScreen';
 import { useSelector } from 'react-redux';
 
 function App() {
+
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
 
