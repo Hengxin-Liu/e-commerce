@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import userRouter from './router/userRouter.js';
 
 const app=express();
-mongoose.connect(process.env.MONGODB_URL'mongodb://localhost:27017/amazona',{
+mongoose.connect(process.env.MONGODB_URL||'mongodb://localhost:27017/amazona',{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 });
