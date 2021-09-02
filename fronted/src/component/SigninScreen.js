@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {signin} from '../actions/userAction'
+import LoadingBox from './LoadingBox';
+import MessageBox from './MessageBox';
 
 export default function SigninScreen(props){
    const [email,setEmail]=useState('');
    const [password,setPassword]=useState('');
-    const submitHandler=(e)=>{
+
+   const redirect = props.location.search
+    ? props.location.search.split('=')[1]
+    : '/';
+    const userSignin = useSelector((state) => state.userSignin);
+    const {userInfo, loading, error} = userSignin;
+
+   const dispatch=useDispatch();
+   const submitHandler = (e) => 
+   {
         e.preventDefault();
-        //TODO : sigin action
-    }
+        dispatch(signin(email,password));
+   };
+    useEffect(() => {
+        if(userInfo){
+            props.history.push(redirect);
+        }
+    },[props.history, redirect, userInfo]);
   return(
       <div>
           <form className="form" onSubmit={submitHandler}>
             <div>
                 <h1>Sign In</h1>
             </div>
+            {loading && <LoadingBox />}
+            {error && <MessageBox variant="danger">{error}</MessageBox>}
             <div>
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email"
@@ -30,7 +50,7 @@ export default function SigninScreen(props){
             </div>
             <div>
                 <label />
-                <button className="primary" type="button">
+                <button className="primary" type="submit">
                     Sign In
                 </button>
             </div>

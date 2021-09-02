@@ -24,7 +24,7 @@ userRouter.post('/signin',
                 res.send({
                     _id: user._id,
                     name: user.name,
-                    email: user.eamil,
+                    email: user.email,
                     isAdmin: user.isAdmin,
                     token: generateToken(user),
                 });
