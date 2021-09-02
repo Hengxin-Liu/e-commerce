@@ -3,16 +3,22 @@ const data={
     users:[
         {
             name:'Harry',
-            email:'liu2332076156@example.com',
+            email:'admin@example.com',
             password: bcrypt.hashSync('1234',8),
-            iaAdmin: true,
+            isAdmin: true,
         },
         {
             name:'Jhon',
             email:'asdasff@example.com',
             password: bcrypt.hashSync('1234',8),
-            iaAdmin: false,
+            isAdmin: false,
         },
+        {
+            name:"Tom",
+            email:"abc@example.com",
+            password:bcrypt.hashSync('1234',8),
+            isAdmin:false,
+        }
     ],
     products:[
         {
