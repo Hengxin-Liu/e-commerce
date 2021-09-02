@@ -1,10 +1,11 @@
 import React from 'react';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import ProductScreen from './component/ProductScreen';
-import HomeScreen from './component/HomeScreen';
-import CartScreen from './component/CartScreen';
+import ProductScreen from './component/ProductScreen.js';
+import HomeScreen from './component/HomeScreen.js';
+import CartScreen from './component/CartScreen.js';
 import { useSelector } from 'react-redux';
+import SigninScreen from './component/SigninScreen.js';
 
 function App() {
 
@@ -25,14 +26,14 @@ function App() {
                             <span className="badge">{cartItems.length}</span>
                         )}
                         </Link>
-                        <Link to="/sigin">Sign In</Link>
+                        <Link to="/signin">Sign In</Link>
                     </div>
                 </header>
                 <main>
                     <Route path="/cart/:id?" component={CartScreen} />
                     <Route path="/product/:id" component={ProductScreen} />
                     <Route path="/" component={HomeScreen} exact />
-
+                    <Route path="/signin" component={SigninScreen}/>
                 </main>
                 <footer className="row center"> All right reserved</footer>
             </div>
