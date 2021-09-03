@@ -18,7 +18,7 @@ export default function CartScreen(props) {
     };
 
     const checkoutHandler = () => {
-    props.history.push('/sign?redirect=shipping');
+    props.history.push('/signin?redirect=shipping');
     };
    
     useEffect(() => {
