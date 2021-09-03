@@ -202,7 +202,7 @@ padding: 1rem;
 }
 .form label{
   margin: 1rem 0;
-  display: block;
+  margin-left: 1rem;
 }
 .space{
   margin-left: 1rem;

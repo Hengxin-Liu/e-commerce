@@ -9,6 +9,7 @@ import SigninScreen from './component/SigninScreen.js';
 import { signout } from './actions/userAction';
 import RegisterScreen from './component/RegisterScreen';
 import ShippingAddressScreen from './component/ShippingAddressScreen';
+import PaymentScreen from './component/PaymentScreen';
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
                     <Route path="/signin" component={SigninScreen}/>
                     <Route path="/register" component={RegisterScreen}/>
                     <Route path="/shipping" component={ShippingAddressScreen}/>
+                    <Route path="/payment" component={PaymentScreen}/>
                 </main>
                 <footer className="row center"> All right reserved</footer>
             </div>
