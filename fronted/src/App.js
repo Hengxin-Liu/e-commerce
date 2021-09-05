@@ -11,6 +11,7 @@ import RegisterScreen from './component/RegisterScreen';
 import ShippingAddressScreen from './component/ShippingAddressScreen';
 import PaymentScreen from './component/PaymentScreen';
 import PlaceOrderScreen from './component/PlaceOrderScreen';
+import OrderScreen from './component/OrderScreen';
 
 function App() {
 
@@ -58,12 +59,13 @@ function App() {
                 <main>
                     <Route path="/cart/:id?" component={CartScreen} />
                     <Route path="/product/:id" component={ProductScreen} />
-                    <Route path="/" component={HomeScreen} exact />
                     <Route path="/signin" component={SigninScreen}/>
                     <Route path="/register" component={RegisterScreen}/>
                     <Route path="/shipping" component={ShippingAddressScreen}/>
                     <Route path="/payment" component={PaymentScreen}/>
                     <Route path="/placeorder" component={PlaceOrderScreen}/>
+                    <Route path="/order/:id" component={OrderScreen}/>
+                    <Route path="/" component={HomeScreen} exact />
                 </main>
                 <footer className="row center"> All right reserved</footer>
             </div>
