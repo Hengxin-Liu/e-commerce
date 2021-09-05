@@ -20,7 +20,7 @@ orderRouter.post(
             shippingPrice: req.body.shippingPrice,
             taxPrice: req.body.taxPrice,
             totalPrice: req.body.totalPrice,
-            user: req.uer._id,
+            user: req.user._id,
         });
        const createOrder = await order.save();
        res.status(201).send({

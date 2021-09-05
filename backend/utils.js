@@ -25,7 +25,7 @@ export const isAuth = (req, res, next) => {
           if(err){
               res.status(401).send({message: 'Invalid Token'});
           }else{
-              req.user = decode;
+              req.user = decode;//data from jwt.sign
               next();//go to next middleware
           }
       });
