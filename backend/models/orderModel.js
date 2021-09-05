@@ -11,8 +11,12 @@ const orderSchema = new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId, 
           ref: 'Product',
           required: true},
+<<<<<<< HEAD
   },
 ],
+=======
+  }],
+>>>>>>> 7070848e6ba6757e737d9258e0c59c7f20368d36
   shippingAddress:{
       fullname: {type: String, required: true},
       address: {type: String, required: true},
