@@ -12,6 +12,7 @@ import ShippingAddressScreen from './component/ShippingAddressScreen';
 import PaymentScreen from './component/PaymentScreen';
 import PlaceOrderScreen from './component/PlaceOrderScreen';
 import OrderScreen from './component/OrderScreen';
+import OrderHistoryScreen from './component/OrderHistoryScreen';
 
 function App() {
 
@@ -40,16 +41,21 @@ function App() {
                         </Link>
                         {
                             userInfo ? (
-                                <div className="dropdown">
-                                <Link to="#">{userInfo.name}
-                                <i className="fa fa-caret-down"></i>
-                                </Link>
+                              <div className="dropdown">
+                                 <Link to="#">{userInfo.name}
+                                   <i className="fa fa-caret-down"></i>
+                                  </Link>
                                 <ul className="dropdown-content">
-                                 <Link to="#signout" onClick={signoutHandler}>
+                                   <li>
+                                     <Link to="/orderhistory">Order History</Link>
+                                   </li>
+                                   <li>
+                                     <Link to="#signout" onClick={signoutHandler}>
                                      Sign out
-                                 </Link>
+                                     </Link>
+                                    </li>
                                 </ul>
-                                </div>
+                              </div>
                             ) :
                             (
                                <Link to="/signin">Sign In</Link> 
@@ -57,6 +63,7 @@ function App() {
                     </div>
                 </header>
                 <main>
+                    <Route path="/" component={HomeScreen} exact />
                     <Route path="/cart/:id?" component={CartScreen} />
                     <Route path="/product/:id" component={ProductScreen} />
                     <Route path="/signin" component={SigninScreen}/>
@@ -65,7 +72,7 @@ function App() {
                     <Route path="/payment" component={PaymentScreen}/>
                     <Route path="/placeorder" component={PlaceOrderScreen}/>
                     <Route path="/order/:id" component={OrderScreen}/>
-                    <Route path="/" component={HomeScreen} exact />
+                    <Route path="/orderhistory" component={OrderHistoryScreen}/>
                 </main>
                 <footer className="row center"> All right reserved</footer>
             </div>

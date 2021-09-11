@@ -52,5 +52,4 @@ userRouter.post('/register',
         });
     })
 );
-
 export default userRouter;
