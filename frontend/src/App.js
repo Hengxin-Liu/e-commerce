@@ -13,6 +13,7 @@ import PaymentScreen from './component/PaymentScreen';
 import PlaceOrderScreen from './component/PlaceOrderScreen';
 import OrderScreen from './component/OrderScreen';
 import OrderHistoryScreen from './component/OrderHistoryScreen';
+import ProfileScreen from './component/ProfileScreen';
 
 function App() {
 
@@ -47,6 +48,9 @@ function App() {
                                   </Link>
                                 <ul className="dropdown-content">
                                    <li>
+                                      <Link to="/profile">User Profile</Link> 
+                                   </li>
+                                   <li>
                                      <Link to="/orderhistory">Order History</Link>
                                    </li>
                                    <li>
@@ -73,6 +77,7 @@ function App() {
                     <Route path="/placeorder" component={PlaceOrderScreen}/>
                     <Route path="/order/:id" component={OrderScreen}/>
                     <Route path="/orderhistory" component={OrderHistoryScreen}/>
+                    <Route path="/profile" component={ProfileScreen}/>
                 </main>
                 <footer className="row center"> All right reserved</footer>
             </div>
