@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listOrderMine } from '../actions/orderAction';
-import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
+import LoadingBox from '../component/LoadingBox';
+import MessageBox from '../component/MessageBox';
 
 export default function OrderHistoryScreen(props) {
   const orderMineList = useSelector((state) => state.orderMineList);

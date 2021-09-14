@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { detailsOrder, payOrder } from "../actions/orderAction";
-import LoadingBox from "./LoadingBox";
-import MessageBox from "./MessageBox";
+import LoadingBox from "../component/LoadingBox";
+import MessageBox from "../component/MessageBox";
 import { ORDER_PAY_RESET } from "../constants/orderConstant";
 
 export default function OrderScreen(props) {

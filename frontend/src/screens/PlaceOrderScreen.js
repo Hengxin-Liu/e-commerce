@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrder } from "../actions/orderAction";
 import { ORDER_CREATE_RESTE } from "../constants/orderConstant";
-import CheckoutSteps from "./CheckoutSteps";
-import LoadingBox from "./LoadingBox";
-import MessageBox from "./MessageBox";
+import CheckoutSteps from "../component/CheckoutSteps";
+import LoadingBox from "../component/LoadingBox";
+import MessageBox from "../component/MessageBox";
 
 export default function PlaceOrderScreen(props){
     const cart = useSelector((state) => state.cart);

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../actions/userAction'
-import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
+import LoadingBox from '../component/LoadingBox';
+import MessageBox from '../component/MessageBox';
 
 export default function RegisterScreen(props){
    const [name,setName]=useState('');
