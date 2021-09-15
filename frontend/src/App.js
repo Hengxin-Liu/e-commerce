@@ -32,36 +32,60 @@ function App() {
               <div>
                  <Link to="/" className="brand">amazona</Link>
               </div>
-                <div>
-                  <Link to="/cart">
+              <div>
+                 <Link to="/cart">
                     Cart
-                   {cartItems.length > 0 && (
+                  {
+                   cartItems.length > 0 && (
                     <span className="badge">{cartItems.length}</span>
-                    )}
+                  )}
                  </Link>
-                    {
-                     userInfo ? (
-                       <div className="dropdown">
-                        <Link to="#">{userInfo.name}
-                          <i className="fa fa-caret-down"></i>
-                        </Link>
-                          <ul className="dropdown-content">
-                            <li>
-                               <Link to="/profile">User Profile</Link> 
-                            </li>
-                            <li>
-                              <Link to="/orderhistory">Order History</Link>
-                            </li>
-                            <li>
-                              <Link to="#signout" onClick={signoutHandler}>
+                  {
+                    userInfo ? (
+                     <div className="dropdown">
+                       <Link to="#">{userInfo.name}
+                        <i className="fa fa-caret-down"></i>
+                       </Link>
+                         <ul className="dropdown-content">
+                          <li>
+                            <Link to="/profile">User Profile</Link> 
+                          </li>
+                          <li>
+                            <Link to="/orderhistory">Order History</Link>
+                          </li>
+                          <li>
+                            <Link to="#signout" onClick={signoutHandler}>
                                 Sign out
-                              </Link>
-                            </li>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    ) : (
+                        <Link to="/signin">Sign In</Link> 
+                    )}   
+                    {
+                       userInfo && userInfo.isAdmin && (
+                         <div className="dropdown">
+                            <Link to="#admin">
+                               Admin{' '}<i className="fa fa-caret-down"></i>
+                            </Link>
+                            <ul className="dropdown-content">
+                             <li>
+                               <Link to="/dashboard">Dashboard</Link>
+                             </li>
+                             <li>
+                               <Link to="/productlist">Products</Link>
+                             </li>
+                             <li>
+                               <Link to="/orderlist">Orders</Link>
+                             </li>
+                             <li>
+                               <Link to="/userlist">Users</Link>
+                             </li>
                             </ul>
-                            </div>
-                          ) : (
-                             <Link to="/signin">Sign In</Link> 
-                            )}                        
+                         </div>
+                            )
+                    }
                  </div>
             </header>
             <main>
@@ -77,9 +101,9 @@ function App() {
              <Route path="/orderhistory" component={OrderHistoryScreen}/>
              <PrivateRoute path="/profile" component={ProfileScreen}/> 
             </main>
-        <footer className="row center"> All right reserved</footer>
-            </div>
-        </BrowserRouter>
+            <footer className="row center"> All right reserved</footer>
+        </div>
+ </BrowserRouter>
     );
 }
 
