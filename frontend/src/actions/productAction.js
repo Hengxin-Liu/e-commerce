@@ -1,3 +1,4 @@
+import axios from "axios";
 import Axios from "axios";
 import * as  ActionType from "../constants/productConstants"
 
@@ -31,3 +32,21 @@ export const detailsProduct = (productId) => async (dispatch) => {
     }
 };
 
+export const createProduct = () => async(dispatch,getState) => {
+  dispatch({type: ActionType.PRODUCT_CREATE_REQUEST});
+  try{
+   const {userSignin: {userInfo}} = getState();
+   const {data} = await axios.post('/api/products',{},
+    {
+        headers: {Authorization: `Bearer ${userInfo.token}`}
+    });
+    dispatch({type: ActionType.PRODUCT_CREATE_SUCCESS,payload: data.product});
+  }catch(error){
+    dispatch({
+       type: ActionType.PRODUCT_CREATE_FAIL,
+       payload: error.response && error.response.data.message
+         ? error.response.data.message
+         : error.message
+     })
+  }
+};

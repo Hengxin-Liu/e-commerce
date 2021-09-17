@@ -2,12 +2,13 @@ import express from 'express';
 import data from '../data.js';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import { isAdmin, isAuth } from "../utils.js"
 
 
 const productRouter = express.Router();
 
 productRouter.get('/',
-expressAsyncHandler(async(req,res)=>{
+   expressAsyncHandler( async(req, res) => {
     const products = await Product.find({});
     res.send(products);
 })
@@ -15,7 +16,7 @@ expressAsyncHandler(async(req,res)=>{
 
 productRouter.get(
     '/seed',
-    expressAsyncHandler(async(req,res) =>{
+    expressAsyncHandler( async(req, res) => {
    // await Product.remove({});
     const createProducts = await Product.insertMany(data.products);
     res.send({createProducts});
@@ -23,8 +24,8 @@ productRouter.get(
 );
 
 productRouter.get('/:id',expressAsyncHandler(async(req,res)=>{
-    const product = await Product.findById(req.params.id);
-    if (product){
+   const product = await Product.findById(req.params.id);
+   if (product){
         res.send(product);
     }else{
         res.status(404).send({message:'Product Not Fonud'});
@@ -33,3 +34,23 @@ productRouter.get('/:id',expressAsyncHandler(async(req,res)=>{
 );
 
 export default productRouter;
+
+productRouter.post('/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req,res) => {
+   const product = new Product({
+       name: 'sample name' + Date.now(),
+       image: 'images/p1.jpg',
+       price: 0,
+       catergory: 'sample catergory',
+       brand: 'sample brand',
+       countInStock: '0',
+       rating: 0,
+       numReviews: 0,
+       description: 'sample description',
+   });
+   const createProduct = await product.save();
+   res.send({message:'Product Ceated', product: createProduct});
+})
+);

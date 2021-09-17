@@ -1,23 +1,48 @@
 import { PromiseProvider } from 'mongoose';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {listProducts} from '../actions/productAction';
+import {createProduct, listProducts} from '../actions/productAction';
 import LoadingBox from '../component/LoadingBox';
 import MessageBox from '../component/MessageBox';
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
 export default function ProductListScreen (props) {
   const productList = useSelector((state) => state.productList);
   const {loading, error, products} = productList;
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+     loading: loadingCreate, 
+     error: errorCreate,
+     success: successCreate,
+     product: createdProduct,
+    } = productCreate;
   const dispatch = useDispatch();
    useEffect(() => {
-       dispatch(listProducts());
-   },[dispatch]);
+     if(successCreate){
+      dispatch({type: PRODUCT_CREATE_RESET});
+      props.history.push(`product/${createdProduct._id}/edit`);
+    }
+      dispatch(listProducts());
+   },[createdProduct,dispatch,props.history,successCreate]);
   const deleteHandler = () => {
    
    };
+  const createHandler = () => {
+      dispatch(createProduct());
+  };
   return(
     <div>
-      <h1>Products</h1>
+        <div className="row">
+          <h1>Products</h1>
+          <button 
+            type="button"
+            className="primary"
+            onClick={createHandler}>
+              Create Product
+          </button> 
+        </div>
+      {loadingCreate && <LoadingBox />}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
        {
          loading ? (<LoadingBox />
         ) : error ? (
@@ -40,7 +65,7 @@ export default function ProductListScreen (props) {
                  <tr key={product._id}>
                    <td>{product._id}</td>
                    <td>{product.name}</td>
-                   <td>{product.price}</td>
+                   <td>{product.price.toFixed(2)}</td>
                    <td>{product.category}</td>
                    <td>{product.brand}</td>
                    <td>
