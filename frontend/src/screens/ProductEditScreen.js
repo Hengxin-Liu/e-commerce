@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailsProduct } from '../actions/productAction';
+import { detailsProduct, updateProduct } from '../actions/productAction';
 import LoadingBox from '../component/LoadingBox';
 import MessageBox from '../component/MessageBox';
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
 export default function ProductEditScreen(props) {
     const productId = props.match.params.id;
@@ -15,9 +16,17 @@ export default function ProductEditScreen(props) {
     const [description, setDescription] = useState('');
     const productDetails = useSelector((state) => state.productDetails);
     const {loading, error, product} = productDetails;
+    const {loading: loadingUpdate, 
+        error: errorUpdated,
+        success: successUpdat
+      } = useSelector((state) => state.productUpdate);
     const dispatch = useDispatch();
     useEffect(() => {
+     if(successUpdat){
+      props.history.push('/productlist');
+    }
       if (!product || product._id !== productId){
+        dispatch({type: PRODUCT_UPDATE_RESET});
         dispatch(detailsProduct(productId));
      }else{
        setName(product.name);
@@ -28,10 +37,14 @@ export default function ProductEditScreen(props) {
        setBrand(product.brand);
        setDescription(product.description);
      }
-    },[dispatch,product,productId]);
+    },[dispatch,product,productId,successUpdat,props.history]);
    const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update product
+    dispatch(updateProduct({
+       _id:productId, name, price, image, category,
+       brand, countInStock, description,
+     }));
    };
   return(
     <div>
@@ -39,6 +52,8 @@ export default function ProductEditScreen(props) {
        <div>
          <h1>Edit Product {productId}</h1>
        </div>
+       {loadingUpdate && <LoadingBox/>}
+       {errorUpdated && <MessageBox variant="danger">{errorUpdated}</MessageBox>}
        {
         loading ? (<LoadingBox></LoadingBox>) 
         : error ? (<MessageBox variant="danger">{error}</MessageBox>)

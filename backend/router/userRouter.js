@@ -43,9 +43,9 @@ userRouter.post('/register',
         password: bcrypt.hashSync(req.body.password, 8),
      });
     const existUser = await User.find({},{'email':1, '_id':0});
-    const existuserString = existUser.toString();
-    const usermailString = (user.email).toString();
-    const existed = existuserString.match(usermailString);
+    const existUserEmailString = existUser.toString();
+    const userEmailString = (user.email).toString();
+    const existed = existUserEmailString.match(userEmailString);
       if(existed){
          res.status(404).send({message: 'email has been existed'});
       }else{
