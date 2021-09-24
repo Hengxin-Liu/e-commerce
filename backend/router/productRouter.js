@@ -86,7 +86,6 @@ productRouter.delete(
       const deleteProduct = await product.remove();
       res.send({ message: 'Product Deleted', product: deleteProduct });
     } else {
-
       res.status(404).send({ message: 'Product Not Found' });
     }
   })
