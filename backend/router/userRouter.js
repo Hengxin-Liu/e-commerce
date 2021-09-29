@@ -49,7 +49,7 @@ userRouter.post('/register',
       if(existed){
          res.status(404).send({message: 'email has been existed'});
       }else{
-    const createdUser = await user.save();
+         const createdUser = await user.save();
          res.send({
          _id: createdUser._id,
          name: createdUser.name,
@@ -81,7 +81,7 @@ userRouter.put('/profile' ,
         if(req.body.password){
             user.password = bcrypt.hashSync(req.body.password, 8);
         }
-    //pass data to update the document if it's not existed then insert
+ //pass data to update the document if it's not existed then insert
     const updatedUser = await user.save();
      res.send({
          _id: updatedUser._id,

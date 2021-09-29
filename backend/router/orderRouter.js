@@ -1,9 +1,19 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
-import { isAuth } from "../utils.js";
+import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
+
+orderRouter.get('/',
+   isAuth,
+   isAdmin,
+   expressAsyncHandler(async(req, res) => {
+//show user details which is in user collection 
+    const orders = await Order.find({}).populate('user','name');
+    res.send(orders);
+  })
+);
 
 orderRouter.get(
     '/mine',
@@ -46,7 +56,7 @@ orderRouter.get('/:id', isAuth, expressAsyncHandler(async(req, res)=>{
   }
 }));
 
-orderRouter.put('/:id/pay',      //update information to use put()
+orderRouter.put('/:id/pay',     //update information to use put()
      isAuth, 
      expressAsyncHandler(async(req,res) => {
     const order = await Order.findById(req.body.id);
@@ -66,4 +76,18 @@ orderRouter.put('/:id/pay',      //update information to use put()
     }
 })
 );
+
+orderRouter.delete('/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async(req, res) => {
+   const order = await Order.findById(req.params.id);
+   if(order){
+    const deleteOrder = await order.remove();
+    res.send({message: 'Delete Successfully', order: deleteOrder});
+   }else{
+    res.status(404).send({message: 'Order Not Found'});
+   }
+}));
+
 export default orderRouter;
