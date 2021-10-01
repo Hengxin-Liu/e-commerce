@@ -3,14 +3,14 @@ import data from '../data.js';
 import expressAsyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
-import { generateToken, isAuth } from '../utils.js';
+import { generateToken, isAdmin, isAuth } from '../utils.js';
 
 const userRouter = express.Router();
 
 userRouter.get(
     '/seed',
     expressAsyncHandler(async (req, res) => {
-        // await User.remove({});
+         await User.remove({});
         const createdUsers = await User.insertMany(data.users);
         res.send({ createdUsers });
     })
@@ -92,4 +92,29 @@ userRouter.put('/profile' ,
      });
     }
 }));
+
+userRouter.get('/',
+ isAuth, 
+ isAdmin,
+ expressAsyncHandler(async(req, res) => {
+  const users = await User.find({});
+  res.send(users);
+}));
+
+userRouter.delete('/:id',
+ isAuth,
+ isAdmin,
+ expressAsyncHandler(async(req, res) => {
+  const user = await User.findById(req.params.id);
+  if(user){
+   if(user.email === 'admin@example.com'){
+       res.status(404).send({message: 'Can Not Delete'});
+       return ;
+   }
+   const deleteUser = await user.remove();
+   res.send({message: 'User Deleted',user: deleteUser});
+  }else{
+    res.status(404).send({ message: 'User Not Found' });
+  }
+ }));
 export default userRouter;
