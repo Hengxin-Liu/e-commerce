@@ -22,7 +22,7 @@ export default function ProfileScreen(props){
 
    useEffect(() => {
  // when user make the profille blank it will fetch data from backend
-       if(!user){
+       if(!user || user._id !== userInfo._id){
         dispatch({type: USER_UPDATE_PROFILE_RESET});
         dispatch(detailsUser(userInfo._id));
        }else{
