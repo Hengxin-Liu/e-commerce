@@ -18,7 +18,15 @@ const data={
             email:"abc@example.com",
             password:bcrypt.hashSync('1234',8),
             isAdmin:false,
-        }
+            isSeller:true,
+            seller:{
+                name: 'Tom',
+                logo: '/images/p1.jpg',
+                description: 'excellent',
+                rating: 4.5,
+                numReviews: 10,
+            }
+       }
     ],
     products:[
         {

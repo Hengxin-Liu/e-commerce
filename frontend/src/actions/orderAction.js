@@ -75,14 +75,14 @@ export const listOrderMine = () => async(dispatch, getState) => {
   }
 };
 
-export const listOrders = () => async(dispatch,getState) => {
+export const listOrders = ({ seller = '' }) => async(dispatch,getState) => {
   dispatch({type: ORDER_LIST_REQUEST});
   const {userSignin: {userInfo}} = getState();
   try{
-    const { data } = await axios.get('/api/orders',{
+    const { data } = await axios.get(`/api/orders?seller=${seller}`,{
      headers: {Authorization: `Bearer ${userInfo.token}`}
     });
-    console.log(data);
+
     dispatch({type: ORDER_LIST_SUCCESS, payload: data});
   }catch(error){
     const message = error.response && error.response.data.message

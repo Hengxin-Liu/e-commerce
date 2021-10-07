@@ -7,9 +7,9 @@ import { USER_DELETE_RESET } from '../constants/userConstant';
 
 export default function UserListScreen(props) {
  
+  const adminEmail = /admin@example.com/g;
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
-
   const userDelete = useSelector((state) => state.userDelete);
   const {
     loading: loadingDelete,
@@ -55,6 +55,7 @@ export default function UserListScreen(props) {
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
+                <>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -62,7 +63,7 @@ export default function UserListScreen(props) {
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
                   <button type="button"
-                   className="small"
+                   className={`${adminEmail.exec(user.email) ? "hiden" : "small"}`}
                    onClick={() => 
                     props.history.push(`/user/${user._id}/edit`)}
                    >
@@ -70,12 +71,13 @@ export default function UserListScreen(props) {
                   </button>
                   <button
                    type="button"
-                   className="small"
+                   className={`${user.isAdmin ? "hiden" : "small"}`}
                    onClick={() => deleteHandler(user)}
                   >
                     Delete
                   </button>
                 </td>
+                </>
               </tr>
             ))}
           </tbody>

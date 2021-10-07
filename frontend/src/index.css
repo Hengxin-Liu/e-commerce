@@ -31,7 +31,7 @@ header{ /*connect to above*/
 }
 main{
   grid-area: main;
-  padding: 1 rem;
+  padding: 1rem;
 }
 footer{
   grid-area: footer;
@@ -89,8 +89,12 @@ button.primary{
 button.block{
   width: 100%;
 }
-.button.small{
-  font-size: 1.2 rem;
+button.small{
+  font-size: 1.5rem;
+  color: #2020a0;
+}
+button.hiden{
+  display:none;
 }
 /* Header */
 header a{
@@ -248,19 +252,19 @@ display: block;
   color:#f08000;
 }
 /*Table*/
-.table{
+table{
   width: 100%;
   border-collapse: collapse;
 }
-.table tbody tr:nth-of-type(odd){
+table tbody tr:nth-of-type(odd){
   background-color: #f4f4f4;
 }
-.table td, 
-.table th{
+table td, 
+table th{
   text-align: left;
-  border:0.1 rem solid #e4e4e4;
-  padding: 0.5 rem;
+  border:0.1rem solid #e4e4e4;
+  padding: 0.5rem;
 }
-.table button{
+table button{
   margin: 0 0.2rem;
 }
