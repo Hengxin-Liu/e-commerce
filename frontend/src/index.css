@@ -88,6 +88,7 @@ button.primary{
 }
 button.block{
   width: 100%;
+  
 }
 button.small{
   font-size: 1.5rem;
@@ -132,8 +133,14 @@ a.brand{
 .col-2{
   flex: 2 1 50rem;
 }
+.col-3 {
+  flex: 32 1 75rem;
+}
 .min-30{
   min-width:30rem;
+}
+.p-1 {
+  padding: 1rem;
 }
 img{
   border-radius: 0.5rem;
