@@ -14,8 +14,7 @@ export default function OrderScreen(props) {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const userSignin = useSelector((state) => state.userSignin);
-  const {userInfo} = userSignin;
-
+  const { userInfo } = userSignin;
   const orderPay = useSelector((state) => state.orderPay);
   const {loading: loadingPay, error: errorPay, success: successPay} = orderPay;
   const orderDeliver = useSelector((state) => state.orderDeliver);
@@ -37,7 +36,7 @@ export default function OrderScreen(props) {
       document.body.appendChild(script);
     };
     if(
-      !order  || 
+      !order || 
       successPay ||
       successDeliver ||
      (order && order._id !== orderId))// if it's not loaded
@@ -61,8 +60,7 @@ export default function OrderScreen(props) {
    dispatch(payOrder(order, paymentResult));
   };
   const deliverHandler = () => {
-    dispatch(deliverOrder
-      (order._id));
+    dispatch(deliverOrder(order._id));
   }
   return loading ? (<LoadingBox></LoadingBox>) :
     error ? (<MessageBox variant="danger">{error}</MessageBox>)
@@ -71,7 +69,7 @@ export default function OrderScreen(props) {
           <div className="row top">
             <div className="col-2">
               <ul>
-                <div className="card">Order {order._id}</div>
+                <div className="card">Order </div>
                 <li>
                   <div className="card card-body">
                     <h2>Shipping</h2>
@@ -179,7 +177,7 @@ export default function OrderScreen(props) {
                        )}
                      </li>
                    )}
-                 {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                 {userInfo.isAdmin && order.isPaid && order.isDelivered && (
                    <li>
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     {errorDeliver && (

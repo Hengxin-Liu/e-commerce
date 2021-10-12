@@ -23,6 +23,8 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SellerRoute from './component/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
+import SearchScreen from './screens/SearchScreen';
+import SearchBox from './component/SearchBox';
 
 function App() {
  const cart = useSelector((state) => state.cart);
@@ -39,6 +41,13 @@ function App() {
             <header className="row">
               <div>
                  <Link to="/" className="brand">amazona</Link>
+              </div>
+              <div>
+               <Route
+                render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+               )}
+              ></Route>
               </div>
               <div>
                  <Link to="/cart">
@@ -122,8 +131,9 @@ function App() {
              <Route path="/shipping" component={ShippingAddressScreen}/>
              <Route path="/payment" component={PaymentScreen}/>
              <Route path="/placeorder" component={PlaceOrderScreen}/>
-             <Route path="/order/:id" component={OrderScreen}/>
+             <PrivateRoute path="/order/:id" component={OrderScreen}/>
              <Route path="/orderhistory" component={OrderHistoryScreen}/>
+             <Route path="/search/name/:name?" component={SearchScreen} exact />
              <PrivateRoute path="/profile" component={ProfileScreen}/> 
              <AdminRoute path="/productlist" component={ProductListScreen} exact/>
              <AdminRoute path="/orderList" component={OrderListScreen} exact/>
