@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import ProductScreen from './screens/ProductScreen.js';
@@ -25,22 +25,42 @@ import SellerRoute from './component/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
 import SearchScreen from './screens/SearchScreen';
 import SearchBox from './component/SearchBox';
+import { listProductCategories } from './actions/productAction';
+import LoadingBox from './component/LoadingBox';
+import MessageBox from './component/MessageBox';
 
 function App() {
  const cart = useSelector((state) => state.cart);
+ const [sidebarIsopen, setSidebarIsOpen] = useState(false);
  const { cartItems } = cart;
  const userSignin = useSelector((state) => state.userSignin);
  const {userInfo} = userSignin;
  const dispatch = useDispatch();
  const signoutHandler = () =>{
         dispatch(signout());
-    }
+    };
+ const productCategoryList = useSelector((state) => state.productCategoryList);
+ const {
+  loading: loadingCategories,
+  error: errorCategories,
+  categories,
+} = productCategoryList;
+ useEffect(() => {
+  dispatch(listProductCategories());
+ },[dispatch]);
    return (
     <BrowserRouter>
         <div className="grid-container">
             <header className="row">
               <div>
-                 <Link to="/" className="brand">amazona</Link>
+                <button 
+                type="button" 
+                className="open-sidebar" 
+                onClick={()=>setSidebarIsOpen(true)}
+                >
+                  <i className="fa fa-bars"></i>
+                </button>
+                <Link to="/" className="brand">amazona</Link>
               </div>
               <div>
                <Route
@@ -95,8 +115,7 @@ function App() {
                       </ul>
                     </div>
                    )}
-                    {
-                       userInfo && userInfo.isAdmin && (
+                    { userInfo && userInfo.isAdmin && (
                          <div className="dropdown">
                             <Link to="#admin">
                                Admin{' '}<i className="fa fa-caret-down"></i>
@@ -116,10 +135,37 @@ function App() {
                              </li>
                             </ul>
                          </div>
-                            )
-                    }
+                    )}
                  </div>
             </header>
+            <aside className={sidebarIsopen ? 'open' : ''}>
+              <ul className="categories">
+                <li>
+                  <strong> Categories</strong>
+                  <button 
+                   onClick={() => setSidebarIsOpen(false)}
+                   className="close-sidebar"
+                   type="button"
+                   >
+                  <i className="fa fa-close"></i>
+                  </button>
+                </li>
+                {loadingCategories ? (
+                 <LoadingBox></LoadingBox>
+                ) : errorCategories ? (
+                  <MessageBox variant="danger">{errorCategories}</MessageBox>
+                ) : (
+                  categories.map((c) => (
+                    <li key={c}>
+                      <Link to={`/search/category/${c}`}
+                         onClick={() => setSidebarIsOpen(false)}>
+                         {c}
+                      </Link>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </aside>
             <main>
              <Route path="/" component={HomeScreen} exact />
              <Route path="/seller/:id" component={SellerScreen} />
@@ -134,6 +180,8 @@ function App() {
              <PrivateRoute path="/order/:id" component={OrderScreen}/>
              <Route path="/orderhistory" component={OrderHistoryScreen}/>
              <Route path="/search/name/:name?" component={SearchScreen} exact />
+             <Route path="/search/category/:category" component={SearchScreen} exact />
+             <Route path="/search/category/:category/name/:name" component={SearchScreen} exact/>
              <PrivateRoute path="/profile" component={ProfileScreen}/> 
              <AdminRoute path="/productlist" component={ProductListScreen} exact/>
              <AdminRoute path="/orderList" component={OrderListScreen} exact/>
