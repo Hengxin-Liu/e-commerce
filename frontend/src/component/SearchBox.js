@@ -11,8 +11,8 @@ export default function SearchBox(props){
       <div className="row">
         <input
           type="text"
-          name="q"
-          id="q"
+          id="name"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <button className="primary" type="submit">

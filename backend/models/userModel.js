@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, reuired:true},
     isAdmin: {type: Boolean, default: false, required:true},
     isSeller: {type: Boolean, default: false, required:true},
-    seller: {_id: mongoose.Schema.Types.ObjectId,
+    seller: { 
         name: String,
         logo: String,
         description: String,
