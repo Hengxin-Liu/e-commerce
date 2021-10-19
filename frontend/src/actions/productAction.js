@@ -6,12 +6,12 @@ import { PRODUCT_CATEGORY_LIST_FAIL, PRODUCT_CATEGORY_LIST_REQUEST, PRODUCT_CATE
     PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS } from "../constants/productConstants"
 
 export const listProducts = ({ 
-  seller = '', name = '', category = '', order = '', min = 0, max = 0, rating = 0,
+  seller = '', name = '', category = '', order = '', min = 0, max = 0, rating = 0, pageNumber = ''
 }) => async (dispatch) => {
     dispatch({type: PRODUCT_LIST_REQUEST });
     try {
       const { data } = await axios.get(
-        `/api/products?seller=${seller}&name=${name}&category=${category}&order=${order}&min=${min}&max=${max}&rating=${rating}`);
+        `/api/products?seller=${seller}&name=${name}&category=${category}&order=${order}&min=${min}&max=${max}&rating=${rating}&pageNumber=${pageNumber}`);
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message })
