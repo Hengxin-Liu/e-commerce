@@ -40,7 +40,7 @@ productRouter.get('/',
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
-    }).populate('seller')
+    }).populate('seller','seller.name seller.logo')
       .sort(sortOrder);
     res.send(products); 
 })
