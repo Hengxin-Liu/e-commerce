@@ -5,6 +5,7 @@
   "description": "e-commerce",
   "main": "index.js",
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "repository": {
@@ -28,5 +29,8 @@
     "bcryptjs": "^2.4.3",
     "eslint-plugin-react": "^7.24.0",
     "mongoose": "^6.0.2"
-  }
+  },
+  
+ "engines": {"node":"14.18.1", "npm": "6.14.15"}
+
 }
