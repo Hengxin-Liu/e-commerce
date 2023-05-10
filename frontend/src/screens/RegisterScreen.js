@@ -43,7 +43,7 @@ export default function RegisterScreen(props){
             <div>
                 <label htmlFor="name">Name</label>
                 <input type="text" 
-                 id="email"name
+                 id="email"
                  placeholder="Enter nane"
                  required
                  onChange={(e)=>setName(e.target.value)}></input>
